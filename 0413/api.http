@@ -1,0 +1,35 @@
+## 레퍼런스 작성
+@server = http://localhost:8000
+@playerId=2
+
+##전체선수조회
+GET {{server}}/players
+### 전체 팀 조회
+GET {{server}}/teams
+## 모든 경기 조회
+GET {{server}}/teamgames
+## 특정선수 조회
+GET {{server}}/players/{{playerId}}
+
+### 이름순으로 전체 팀 조회
+GET {{server}}/teams?sort=name_asc
+### 특정 팀 조회
+@teamId =3
+Get {{server}}/teams/{{teamId}}
+### 특정팀의 모든 선수 조회
+GET {{server}}/teams/{{teamId}}/players
+
+### 선수 추가
+POST {{server}}/players
+Content-Type:application/json; charset=UTF-8
+
+{
+    "name":"손흥민 축구선수",
+    "age" : "31",
+    "teamid" : 2
+}
+
+### 이름으로 팀 검색
+get {{server}}/teams?search=KT
+## 특정선수 삭제 - player, profile연쇄삭제
+DELETE {{server}}/players/{{playerId}}
