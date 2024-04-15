@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- bootstrap cdn -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous" />
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+  <!-- axios cdn -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+
+    <h1>비오는 날엔?</h1>
+    <p>파전에 막걸리 떙기네</p>
+
+    <!-- 모달창 -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">cookie 실습</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              쿠키 연습해보기 비오는날엔 파전에막걸리 <br />
+              쿠키는 쿠킹
+              <div class="text-end mt-3">
+                <input type="checkbox" id="cookie" />
+                <label for="cookie" style="cursor: pointer">비 그만--</label>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" onclick="closeModal();">
+                닫기
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        const myModal = new bootstrap.Modal('#exampleModal')
+
+        const prac = '<% popup %>';  //고유 popup문
+
+        console.log("prac ->" , '<% popup %>')
+        // jQuery 에서 show(), hide()
+        if(prac ==="") {
+            myModal.show()
+        }
+        //모달창에서 오늘그만보기를 체크하면 #cookie -> true -> cookie정보를 넣어서 24시간동안 유지해야함
+        function closeModal(){
+            if(document.getElementById('cookie').checked){
+            axios({
+                url:'/pracCookie',
+                method:'post',
+            }).then(( res)=>{
+                console.log('res.data', res.data)
+            })
+            }
+            myModal.hide();
+        }
+        
+      </script>
+</body>
+</html>
