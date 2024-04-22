@@ -1,0 +1,28 @@
+@server=http://localhost:8000
+###
+GET {{server}}
+###
+GET {{server}}/register
+###
+GET {{server}}/login
+###
+GET {{server}}/users
+
+###회원가입요청 , 헤더내용아래쪽을 한줄 띄우기 잊지 않기
+POST {{server}}/register
+Content-Type: application/json; charset=UTF-8
+
+{
+    "userid" : "orange",
+    "pw" : "1234",
+    "name" : "오렌지"
+}
+### 로그인요청
+POST {{server}}/login
+Content-Type: application/json; charset=UTF-8
+
+{
+    "userid" : "orange",
+    "pw" : "1234",
+    "name" : "오렌지"
+}

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('./head') %>
+<body>
+  <h1>로그인</h1>
+
+  <form onsubmit="login(event)">
+    <input type="text" id="userid" placeholder="아이디" />
+    <input type="password" id="pw" placeholder="비밀번호" />
+    <button type="submit">로그인</button>
+  </form>
+  <br>
+  <a href="/">홈</a>
+  <a href="/register">회원가입</a>
+  <script>
+  async function login(event){
+    event.preventDefault()// 원래 갖고있는 고유의 기능을 해제한다. 여기서는 form태그에 사용했으나 앵커태그에도 주로 사용합니다
+     try{
+      const res = await axios({
+        method:"POST",
+        url:'/login',
+        data:{
+          userid: document.querySelector('#userid').value,
+          pw: document.querySelector('#pw').value,
+        }
+      })
+      if(res.data.result){
+        alert(`${res.data.data.name}님 로그인 성공`);
+        document.cookie = 'testCookie=signup; path=/'; // 쿠키를 특정url로 위치시키기
+        document.location.href = '/'
+      } else {
+        alert(`${res.data.message}`);
+        document.location.reload();
+      }
+
+     } catch (err){
+      console.log(err)
+     }
+  }
+
+
+
+
+  </script>
+</body>
+</html>
