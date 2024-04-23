@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pratices</title>
+  <!-- axios -->
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+  <form action="" name="register">
+    <label for="username">NAME</label>
+    <input type="text" name="username" id="username" required> <br>
+    <fieldset>
+      <legend>Gender</legend>
+      <input type="radio" name="gender" id="male" value="male" checked>
+      <label for="male">Male</label> <br>
+      <input type="radio" name="gender" id="female" value="female">
+      <label for="female">Female</label> <br>
+    </fieldset>
+
+    <fieldset>
+      <legend>Birthday</legend>
+      <label for="year">Year</label>
+      <select name="birthYear" id="year">
+        <% for(let i = 0; i < 50; i++) { %>
+        <option value="<%= 2024 - i %>"><%= 2024 - i  %></option>
+        <% } %>
+        년
+      </select>
+      <select name="birthMonth" id="month">
+        <% for(let i = 1; i <= 12; i++) { %>
+        <option value="<%= i %>"><%= i  %></option>
+        <% } %>
+        월
+      </select>
+      <select name="birthDay" id="day">
+        <% for(let i = 1; i <= 30; i++) { %>
+        <option value="<%= i %>"><%= i  %></option>
+        <% } %>
+        일
+      </select>
+    </fieldset>
+
+    <fieldset>
+      <legend>Hobby</legend>
+      <label for="travel">Travel</label>
+      <input type="checkbox" name="hobby" id="travel" value="Travel">
+      <label for="game">Game</label>
+      <input type="checkbox" name="hobby" id="game" value="Game">
+      <label for="fashion">Fashion</label>
+      <input type="checkbox" name="hobby" id="fashion" value="Fashion">
+    </fieldset>
+    <button type="button" onclick="clickRegister()">Register</button>
+  </form>
+  <hr>
+  <div class="registerResult"></div>
+
+  <script>
+    const form = document.forms['register'];
+    const result = document.querySelector('.registerResult');
+
+    function clickRegister() {
+      console.log('hello');
+      const hobbies = Array.from(form.hobby).filter(elem => elem.checked === true).map(elem => elem.value)
+  
+      console.log('hobby중 사용자가 체크한 것들', hobbies);
+      const data = {
+        username: form.username.value,
+        gender: form.gender.value,
+        birthYear: form.year.value,
+        birthMonth: form.month.value,
+        birthDay: form.day.value,
+        hobby: hobbies,
+      }
+
+      axios({
+        method: "GET",
+        url: "/register",
+        params: data
+      }).then(response => {
+        console.log(response.data);
+
+        const { 
+          username,
+          gender,
+          birthYear,
+          birthMonth,
+          birthDay,
+          hobby
+        } = response.data;
+
+        result.innerHTML = `${username}님 환영합니다!
+        가입완료! 생년월일은 ${birthYear}년 ${birthMonth}월 ${birthDay}일! 취미는 ${hobby}`;
+
+      });
+    }
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+
+
+    <script>
+        // filter는 조건에 해당하는 것만 취한다
+        //형식 : filter(currentValue, 인덱스, 자기자신)
+    //     const result=[1,2,3,4,5].filter(function(item, index, self){
+    //     console.log(`[${index}] = ${item}`);
+    //         return item %2 ;
+
+    // })
+    // console.log(result)
+
+        //reduce 메소드
+        // 빈요소를 제외하고 배열내에 존재하는 각 요소에 대해 콜백함수를 한번씩 실행한다.
+        // [1,2,3,4,5].reduce(function(합계를 갖고있는 변수, 현재값, 배열){
+        //     함수에서 해야할 코드들
+        // }), 합계를 갖고있는 변수의 초기값
+            // const sum=[1,2,3,4,5].reduce(function(pre,cur){
+            //     return per+cur;
+            // },0)
+
+            // console.log(sum)    
+
+
+                //유사배열 , 문자열
+
+                const result= Array.from('hello')
+                console.log(result)
+    </script>
+</body>
+</html>
