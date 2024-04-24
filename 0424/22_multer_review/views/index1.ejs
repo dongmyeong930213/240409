@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <style>
+    .profile{ width: 200px; height: 200px; border-radius:50%;
+      box-shadow: 0 0 20px rgba(0,0,0,.5);}
+
+    </style>
+</head>
+<body>
+    <h1>회원 정보 폼</h1>
+    <input type="text" name="title" id="title" placeholder="Title">
+    <label for=""> 회원사진</label>
+    <input type="file" name="dynamicFile" id="dynamicFile">
+    <button type="button" onclick="fileUpload()">업로드</button>
+
+    <br>
+    <!-- 업로드 이미지 보여줄 img태그 -->
+    <img src="" alt="">
+
+    <script>
+        function fileUpload(){
+            const title = document.querySelector('#title');
+            const file = document.querySelector('#dynamicFile');
+            const img = document.querySelector('img');
+            //formData() 폼의 전송을 쉽게 해주며 axios와 함께 사용한다.
+            const formData = new FormData();
+            formData.append( 'dynamicFile' , file.files[0] )
+            formData.append( 'title' , title.value)
+
+            
+
+            axios({
+                method:"POST",
+                url:"/dynamic",
+                data:formData,
+                headers:{ 'content-Type' : 'multipart/form-data'}
+            }).then(req=>{
+                console.log(req.data)
+                const {file, tilte} = req.data
+                const imgElem = document.querySelector('img');
+                imgElem.src = "/"+file.path;
+                imgElem.alt = title;
+                imgElem.classList.add('profile')
+
+
+
+            })
+
+
+        }
+    </script>
+</body>
+</html>
