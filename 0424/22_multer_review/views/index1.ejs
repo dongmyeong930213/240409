@@ -39,9 +39,9 @@
                 url:"/dynamic",
                 data:formData,
                 headers:{ 'content-Type' : 'multipart/form-data'}
-            }).then(req=>{
-                console.log(req.data)
-                const {file, tilte} = req.data
+            }).then(res=>{
+                console.log(res.data)
+                const {file, tilte} = res.data
                 const imgElem = document.querySelector('img');
                 imgElem.src = "/"+file.path;
                 imgElem.alt = title;
